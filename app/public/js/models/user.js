@@ -12,29 +12,29 @@
 
             // Default attrs
             defaults: {
-            }
+            },
 
             // Url
-        ,   url: '/login'
+            url: '/login',
 
             // Logs a user in
-        ,   login: function() {
+            login: function() {
 
                 var success = function( model, response, options ) {
                     model.trigger( 'login',  model, response, options );
-                }
+                };
 
                 // Send the request
                 this.save( this.toJSON(), { success: success, url: '/login' } );
 
-            }
+            },
 
             // Registers users
-        ,   register: function() {
+            register: function() {
 
                 var success = function( model, response, options ) {
                     model.trigger( 'register', model, response, options );
-                }
+                };
 
                 this.save( this.toJSON(), { success: success, url: '/register' } );
 
@@ -43,4 +43,6 @@
     });
 
 
-}).call( this, this.appArgs.config, this.appArgs.models, this.appArgs.views, this.appArgs.routes, this.appArgs.utils );
+}).call( this, this.appArgs.config, this.appArgs.models,
+                this.appArgs.views, this.appArgs.routes,
+                this.appArgs.utils );

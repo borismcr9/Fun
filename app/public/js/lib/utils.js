@@ -24,7 +24,7 @@ _.cammelCaseToUnderscore = function( string ) {
 
         return "_" + $1 . toLowerCase();
     });
-}
+};
 
 /**
 * Converts hiphens to underscores
@@ -36,7 +36,7 @@ _.hyphenToUnderscore = function( string ) {
         return "_";
 
     });
-}
+};
 
 
 
@@ -50,8 +50,8 @@ _.hyphenToUnderscore = function( string ) {
 */
 _.mapFormInputs = function( data, type, dropEmpty ) {
 
-    var formData = type || []
-    ,   _this = this;
+    var formData = type || [],
+        _this = this;
 
     $.each( data, function( key, val ) {
 
@@ -59,7 +59,7 @@ _.mapFormInputs = function( data, type, dropEmpty ) {
 
         if ( dropEmpty ) {
 
-            if ( val.value != "" ) {
+            if ( val.value !== "" ) {
                 formData[ replaced ] = val.value;
             }
 
@@ -73,7 +73,7 @@ _.mapFormInputs = function( data, type, dropEmpty ) {
 
     return formData;
 
-}
+};
 
 
  /**
@@ -83,12 +83,12 @@ _.mapFormInputs = function( data, type, dropEmpty ) {
 */
 _.getFormData = function( form, dropEmpty ) {
 
-    var data
-    ,   _this = this
-    ,   off
-    ,   name;
+    var data,
+        _this = this,
+        off,
+        name;
 
-    if ( dropEmpty == null ) {
+    if ( dropEmpty === null ) {
         dropEmpty = true;
     }
 
@@ -123,4 +123,4 @@ _.getFormData = function( form, dropEmpty ) {
 
     return data;
 
-}
+};

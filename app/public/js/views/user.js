@@ -8,19 +8,19 @@
     views.User = Backbone.View.extend({
 
             // Bind to element
-            el: '.page'
+            el: '.page',
 
 
             // Delegate events for adding new messages
-        ,   events: {
-                    'submit #login-form': 'login'
-                ,   'submit .register-form': 'register'
-            }
+            events: {
+                'submit #login-form': 'login',
+                'submit .register-form': 'register'
+            },
 
 
             // At initialization, we bind to the relevan events on the
             // `messages` collection when items are added or changed.
-        ,   initialize: function() {
+            initialize: function() {
 
                 // User model
                 this.model = new models.User();
@@ -30,50 +30,50 @@
 
                 // On login
                 this.model.on( 'login', this.onLogin );
-            }
+            },
 
             // After registration
-        ,   onRegister: function( model, response, options ) {
+            onRegister: function( model, response, options ) {
 
                 // Dismiss loading
                 // Close modal
-                var modal = '.register-modal'
-                ,   backdrop = '.modal-backdrop';
+                var modal = '.register-modal',
+                backdrop = '.modal-backdrop';
 
-                $( modal ).hide()
+                $( modal ).hide();
                 $( backdrop ).hide();
 
                 alert( 'Voila, You can now login using your credentials.' );
-            }
+            },
 
             // On login
-        ,   onLogin: function( model, response, options ) {
+            onLogin: function( model, response, options ) {
 
                 if ( typeof response.error == 'undefined' ) {
                     return window.location.reload();
                 }
 
                 alert( response.error );
-            }
+            },
 
             // Sync event
-        ,   onSync: function( model, response, options ) {
+            onSync: function( model, response, options ) {
 
                 console.log( response );
 
-            }
+            },
 
             // Render
-        ,   render: function() {
+            render: function() {
 
-            }
+            },
 
             // Login event
-        ,   login: function( e ) {
+            login: function( e ) {
                 e.preventDefault();
 
-                var data
-                ,   target = e.currentTarget;
+                var data,
+                target = e.currentTarget;
 
                 // Get login data
                 data = _.getFormData( target );
@@ -82,14 +82,14 @@
                 this.model.set( data );
                 this.model.login();
 
-            }
+            },
 
             // Register form
-        ,   register: function( e ) {
+            register: function( e ) {
                 e.preventDefault();
 
-                var target = e.currentTarget
-                ,   data;
+                var target = e.currentTarget,
+                    data;
 
                 // Loading status
                 $(  target ).find( 'input[type="submit"]' )

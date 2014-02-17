@@ -2,11 +2,11 @@
 * Fun • Messaging
 */
 
-var express = require( 'express' )
-,   http = require( 'http' )
-,   app = express()
-,   events = require( 'events' )
-,   port = process.env.PORT || 3000;
+var express = require( 'express' ),
+    http = require( 'http' ),
+    app = express(),
+    events = require( 'events' ),
+    port = process.env.PORT || 3000;
 
 
 /**

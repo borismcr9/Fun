@@ -12,20 +12,20 @@
 
             // Default attrs
             defaults: {
-                    // _id: 0
-                    author_id: ''
-                ,   author_display_name: ''
-                ,   message_text: ''
-                ,   date: ''
-            }
+                // _id: 0
+                author_id: '',
+                author_display_name: '',
+                message_text: '',
+                date: ''
+            },
 
             // Parses the content gotten from server
-        ,   parse: function() {
+            parse: function() {
 
-            }
+            },
 
             // Url
-        ,   url: '/message'
+            url: '/message'
 
     });
 

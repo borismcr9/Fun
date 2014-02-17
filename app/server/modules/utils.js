@@ -24,8 +24,8 @@ var Utils = function() {
 */
 Utils.prototype.hash = function( str ) {
 
-    var shasum
-    ,   hash;
+    var shasum,
+        hash;
 
     if ( typeof str != 'number' && typeof str != 'string' ) {
         return false;
@@ -38,11 +38,11 @@ Utils.prototype.hash = function( str ) {
     hash = shasum.update( str ).digest( 'hex' );
     return hash;
 
-}
+};
 
 
 
 /**
 * Exports
 */
-module.exports = new Utils;
+module.exports = new Utils();

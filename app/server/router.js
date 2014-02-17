@@ -48,4 +48,4 @@ module.exports = function( app ) {
     //---------------------------
     app.get( '/debug', App.debug );
 
-}
+};

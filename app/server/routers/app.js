@@ -2,13 +2,13 @@
 /**
 * Main router for the app
 */
-var User = require( '../modules/account-manager' )
-,   Message = require( '../modules/message' )
-,   crypto = require( 'crypto' )
-,   events = require( 'events' )
-,   utils = require( '../modules/utils' )
-,   moment = require( 'moment' )
-,   gravatar = require( '../modules/gravatar' );
+var User = require( '../modules/account-manager' ),
+    Message = require( '../modules/message' ),
+    crypto = require( 'crypto' ),
+    events = require( 'events' ),
+    utils = require( '../modules/utils' ),
+    moment = require( 'moment' ),
+    gravatar = require( '../modules/gravatar' );
 
 
 /**
@@ -19,21 +19,21 @@ function Entrance( req, res ) {
 
     // Config
     this.config = {
-            cookieName: '_entrance_loggedin'
-        ,   expiration: new Date( Date.now() + 9000000 )
-    }
+        cookieName: '_entrance_loggedin',
+        expiration: new Date( Date.now() + 9000000 )
+    };
 
     // Response
-    this.res = res; 
+    this.res = res;
 
     // Request
     this.req = req;
 
-};
+}
 
 
 // Event emitter
-Entrance.prototype = new events.EventEmitter;
+Entrance.prototype = new events.EventEmitter();
 
 
 /**
@@ -42,8 +42,8 @@ Entrance.prototype = new events.EventEmitter;
 */
 Entrance.prototype.parseAuthCookie = function() {
 
-    var cookie = this.req.cookies[ this.config.cookieName ]
-    ,   elements;
+    var cookie = this.req.cookies[ this.config.cookieName ],
+        elements;
 
     if ( typeof cookie == 'undefined' ) return false;
     elements = cookie.split( '|' );
@@ -53,25 +53,25 @@ Entrance.prototype.parseAuthCookie = function() {
     // Return cookie elements
     return { username: elements[ 0 ], expiration: elements[ 1 ], key: elements[ 2 ] };
 
-}
+};
 
 /**
 * Checks whether the auth cookie is valid
 */
 Entrance.prototype.validateAuthCookie = function() {
 
-    var cookie = this.parseAuthCookie()
-    ,   time = new Date()
-    ,   _this = this
-    ,   pFrag
-    ,   pass
-    ,   key;
+    var cookie = this.parseAuthCookie(),
+        time = new Date(),
+        _this = this,
+        pFrag,
+        pass,
+        key;
 
 
     // Check expiration
-    if( cookie == false ) return _this.emit( 'notLoggedIn', 'Cookie not set.' );
+    if( cookie === false ) return _this.emit( 'notLoggedIn', 'Cookie not set.' );
     if( cookie.expiration < time.getTime() ) {
-        return _this.emit( 'notLoggedIn', 'Expired Cookie.')
+        return _this.emit( 'notLoggedIn', 'Expired Cookie.');
     }
 
     // Get user referenced in cookie
@@ -93,7 +93,7 @@ Entrance.prototype.validateAuthCookie = function() {
 
     });
 
-}
+};
 
 
 /**
@@ -102,11 +102,11 @@ Entrance.prototype.validateAuthCookie = function() {
 */
 Entrance.prototype.login = function( creds ) {
 
-    var login
-    ,   _this = this
-    ,   required = [ 'username', 'password' ]
-    ,   setCookie
-    ,   elements = [];
+    var login,
+        _this = this,
+        required = [ 'username', 'password' ],
+        setCookie,
+        elements = [];
 
     for ( var i = 0; i < required.length; i++ ) {
         if ( typeof creds[ required[ i ] ] == 'undefined' ) {
@@ -129,7 +129,7 @@ Entrance.prototype.login = function( creds ) {
 
     });
 
-}
+};
 
 
  /**
@@ -137,9 +137,9 @@ Entrance.prototype.login = function( creds ) {
  */
 Entrance.prototype.setAuthCookie = function( user ) {
 
-    var pFrag
-    ,   cookie
-    ,   key;
+    var pFrag,
+        cookie,
+        key;
 
     if ( typeof user.username == 'undefined' || typeof user.password == 'undefined' ) {
         return false;
@@ -155,7 +155,7 @@ Entrance.prototype.setAuthCookie = function( user ) {
     // Set the cookie
     this.res.cookie( this.config.cookieName, cookie, { maxAge: 9000000000 } );
     return true;
- }
+ };
 
 
 /**
@@ -181,22 +181,22 @@ exports.index = function( req, res ) {
             for( var m in msgs ) {
 
                 msg = {
-                        author_id: msgs[ m ][ 'author_id' ]
-                    ,   author_display_name: msgs[ m ][ 'author_display_name' ]
-                    ,   message_text: msgs[ m ][ 'message_text' ]
-                    ,   date: moment( msgs[ m ][ 'date' ] ).fromNow()
-                    ,   author_avatar_src: gravatar.url( msgs[ m ][ 'author_email' ] )
-                }
+                        author_id: msgs[ m ][ 'author_id' ],
+                        author_display_name: msgs[ m ][ 'author_display_name' ],
+                        message_text: msgs[ m ][ 'message_text' ],
+                        date: moment( msgs[ m ][ 'date' ] ).fromNow(),
+                        author_avatar_src: gravatar.url( msgs[ m ][ 'author_email' ] )
+                };
 
                 coll.push( msg );
             }
 
             // Build user object to render view
             var userClone = {
-                    display_name: user.display_name
-                ,   avatar_src: gravatar.url( user.email ) 
-                ,   email: user.email
-                ,   _id: user._id
+                    display_name: user.display_name,
+                    avatar_src: gravatar.url( user.email ),
+                    email: user.email,
+                    _id: user._id
             };
 
             res.render( 'app', { messages: coll, user: userClone } );
@@ -214,7 +214,7 @@ exports.index = function( req, res ) {
     // Valida user
     entrance.validateAuthCookie();
 
-}
+};
 
 /**
 * App page
@@ -223,16 +223,16 @@ exports.app = function( req, res ) {
 
     // Render app
     res.render( 'app', {} );
-}
+};
 
 /**
 * Login request
 */
 exports.login = function( req, res ) {
 
-    var entrance
-    ,   fields = [ 'username', 'password' ]
-    ,   data = {};
+    var entrance,
+        fields = [ 'username', 'password' ],
+        data = {};
 
     for ( var i = 0; i < fields.length; i++ ) {
         data[ fields[ i ] ] = req.param( fields[ i ] );
@@ -258,7 +258,7 @@ exports.login = function( req, res ) {
     // Login
     entrance.login( data );
 
-}
+};
 
 
 /**
@@ -267,15 +267,15 @@ exports.login = function( req, res ) {
 */
 exports.createUser = function( req, res ) {
 
-    var user = User
-    ,   fields = [ 'username', 'password', 'display_name', 'email' ]
-    ,   data = {}
-    ,   entrance = new Entrance( req, res );
+    var user = User,
+        fields = [ 'username', 'password', 'display_name', 'email' ],
+        data = {},
+        entrance = new Entrance( req, res );
 
     // Get post data
     for ( var i = 0; i < fields.length; i++ ) {
         data[ fields[ i ] ] = req.param( fields[ i ] );
-    };
+    }
 
     // Hash password
     data[ 'password' ] = utils.hash( data[ 'password' ] );
@@ -293,7 +293,7 @@ exports.createUser = function( req, res ) {
 
     });
 
-}
+};
 
 /**
 * New message
@@ -301,10 +301,10 @@ exports.createUser = function( req, res ) {
 exports.newMessage = function( req, res ) {
 
     // Save message
-    var data = {}
-    ,   errors = []
-    ,   fields = [ 'author_id', 'author_display_name'
-            , 'message_text', 'date', 'author_email'
+    var data = {},
+        errors = [],
+        fields = [ 'author_id', 'author_display_name',
+                'message_text', 'date', 'author_email'
         ];
 
     for ( var i = 0; i < fields.length; i++ ) {
@@ -335,7 +335,7 @@ exports.newMessage = function( req, res ) {
 
     });
 
-}
+};
 
 
 /**
@@ -345,4 +345,4 @@ exports.debug = function( req, res ) {
 
     res.send({ debug: 'Response' });
 
-}
+};

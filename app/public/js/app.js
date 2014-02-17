@@ -5,14 +5,14 @@
 
 // Define
 window.app = {
-        config: {
-            templatesUrl: window.location.origin + '/js/templates/'
-        }
-    ,   models: {}
-    ,   views: {}
-    ,   collections: {}
-    ,   routers: {}
-    ,   utils: {}
+    config: {
+        templatesUrl: window.location.origin + '/js/templates/'
+    },
+    models: {},
+    views: {},
+    collections: {},
+    routers: {},
+    utils: {}
 };
 
 // Expose app to the global scope

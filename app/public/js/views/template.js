@@ -7,56 +7,56 @@
     //-----------------
     views.Template = Backbone.View.extend({
 
-            // Bind to element
-            el: '.page'
+        // Bind to element
+        el: '.page',
 
-            // Constructor
-        ,   initialize: function() {
+        // Constructor
+        initialize: function() {
 
-                // Selectors
-                this.backdrop = '.modal-backdrop';
-            }
+            // Selectors
+            this.backdrop = '.modal-backdrop';
+        },
 
-            // Bind events
-        ,   events: {
-                    'click [data-toggle="modal"]' : 'openModal'
-                ,   'click .close, .dismiss': 'closeModal'
-            }
+        // Bind events
+        events: {
+            'click [data-toggle="modal"]' : 'openModal',
+            'click .close, .dismiss': 'closeModal'
+        },
 
-            // Opens the modal
-        ,   openModal: function( e ) {
-                e.preventDefault();
+        // Opens the modal
+        openModal: function( e ) {
+            e.preventDefault();
 
-                var link = e.currentTarget
-                ,   target = $( link ).attr( 'href' ) || $(link ).data( 'target' );
+            var link = e.currentTarget,
+                target = $( link ).attr( 'href' ) || $(link ).data( 'target' );
 
-                // Open
-                $( target ).show();
-                $( this.backdrop ).show();
+            // Open
+            $( target ).show();
+            $( this.backdrop ).show();
 
-            }
+        },
 
-            // Closes the modal
-        ,   closeModal: function( e ) {
-                e.preventDefault;
+        // Closes the modal
+        closeModal: function( e ) {
+            e.preventDefault();
 
-                var link = e.currentTarget
-                ,   dismiss = $( link ).data( 'dismiss' )
-                ,   map;
+            var link = e.currentTarget,
+                dismiss = $( link ).data( 'dismiss' ),
+                map;
 
-                // Dismiss map
-                map = {
-                        'register': '.modal.register-modal'
-                    ,   'about': '.modal.about-modal'
-                }
+            // Dismiss map
+            map = {
+                'register': '.modal.register-modal',
+                'about': '.modal.about-modal'
+            };
 
-                if ( typeof map[ dismiss ] == 'undefined' ) return;
+            if ( typeof map[ dismiss ] == 'undefined' ) return;
 
-                // Hide
-                $( map[ dismiss ] ).hide();
-                $( this.backdrop ).hide();
+            // Hide
+            $( map[ dismiss ] ).hide();
+            $( this.backdrop ).hide();
 
-            }
+        }
 
     });
 

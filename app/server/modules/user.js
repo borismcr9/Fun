@@ -7,9 +7,9 @@
 */
 var mongo = require( 'mongodb' );
 
-var Server = mongo.Server
-,   Db = mongo.Db
-,   BSON = mongo.BSONPure;
+var Server = mongo.Server,
+    Db = mongo.Db,
+    BSON = mongo.BSONPure;
 
 
 // Database Server
@@ -71,4 +71,4 @@ exports.findByUsername = function( username, fn ) {
         });
     });
 
-}
+};

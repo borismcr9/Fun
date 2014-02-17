@@ -10,14 +10,14 @@
     // The collection of messages
     var Messages = Backbone.Collection.extend({
 
-            // Reference to this collection's model
-            model: models.Message
+        // Reference to this collection's model
+        model: models.Message,
 
 
-            // Return all messages
-        ,   all: function() {
-                return message.get( '' );
-            }
+        // Return all messages
+        all: function() {
+            return message.get( '' );
+        }
 
     });
 
